@@ -1,69 +1,76 @@
-let activeTab = 'all';
-const grid = document.getElementById('secrets-grid');
-const search = document.getElementById('search');
+const resultsDiv = document.getElementById('results');
+const searchInput = document.getElementById('search');
+const filterBtns = document.querySelectorAll('.filter-btn');
 
-function renderSecrets(list) {
-  if(list.length === 0){
-    grid.innerHTML = `<p style="text-align:center; grid-column: 1/-1; color:#9ca3af;">No secrets found. Try another keyword.</p>`;
+let currentFilter = 'all';
+
+// RENDER FUNCTION
+function renderCards(data) {
+  if(data.length === 0){
+    resultsDiv.innerHTML = `<p style="text-align:center; color:#9ca3af; padding:40px;">No secrets found. Try searching "Laplace" or "11 trick"</p>`;
     return;
   }
-  grid.innerHTML = list.map(s => `
-    <div class="card" onclick="openModal(${s.id})">
-      <span class="tag">${s.category}</span>
-      <h3>${s.title}</h3>
-      <p>${s.simple}</p>
+  
+  resultsDiv.innerHTML = data.map(item => `
+    <div class="card">
+      <span class="card-badge">${item.category}</span>
+      <h3 class="card-title">${item.id}. ${item.title}</h3>
+      <p class="card-simple">${item.simple}</p>
+      
+      <div><b style="color:#a78bfa;">How it works:</b> ${item.how}</div>
+      
+      <div style="margin-top:15px;">
+        <b style="color:#60a5fa;">5 Examples:</b>
+        ${item.examples.map(ex => `
+          <div class="card-example">
+            <b>Q:</b> ${ex.q} <br>
+            <b>A:</b> ${ex.a}
+          </div>
+        `).join('')}
+      </div>
+      
+      <div class="card-tip"><b>Exam Tip:</b> ${item.examTip}</div>
     </div>
   `).join('');
 }
 
-function openModal(id) {
-  const s = SECRETS.find(x => x.id === id);
-  if(!s) return;
-  document.getElementById('modal-body').innerHTML = `
-    <h2>${s.title}</h2>
-    <p><b>The gist:</b> ${s.simple}</p>
-    <p><b>How to do it:</b> ${s.how}</p>
-    <h4>5 Examples Worked Out:</h4>
-    ${s.examples.map(ex => `
-      <div class="example">
-        <b>Q:</b> ${ex.q} <br>
-        <b>A:</b> ${ex.a}
-      </div>
-    `).join('')}
-    <p><b>Exam tip:</b> ${s.examTip}</p>
-  `;
-  document.getElementById('modal').classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
+// FILTER + SEARCH FUNCTION
+function filterAndSearch() {
+  const query = searchInput.value.toLowerCase();
+  
+  let filtered = SECRETS;
+  
+  // 1. Filter by category
+  if(currentFilter !== 'all'){
+    filtered = filtered.filter(item => item.category === currentFilter);
+  }
+  
+  // 2. Filter by search
+  if(query){
+    filtered = filtered.filter(item => 
+      item.title.toLowerCase().includes(query) ||
+      item.keywords.some(k => k.toLowerCase().includes(query)) ||
+      item.simple.toLowerCase().includes(query)
+    );
+  }
+  
+  renderCards(filtered);
 }
 
-function closeModal() { 
-  document.getElementById('modal').classList.add('hidden'); 
-  document.body.style.overflow = 'auto';
-}
-function closeModalOutside(event){
-  if(event.target.id === 'modal') closeModal();
-}
+// BUTTON CLICK EVENTS
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
 
-function filterTab(tab, el) {
-  activeTab = tab;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  runSearch();
-}
+// SEARCH INPUT EVENT
+searchInput.addEventListener('input', filterAndSearch);
 
-function runSearch() {
-  const q = search.value.toLowerCase().trim();
-  let list = SECRETS;
-  if(activeTab !== 'all') list = list.filter(s => s.category === activeTab);
-  if(q) list = list.filter(s => 
-    s.title.toLowerCase().includes(q) || 
-    s.keywords.some(k => k.includes(q)) ||
-    s.simple.toLowerCase().includes(q)
-  );
-  renderSecrets(list);
-}
-
-search.addEventListener('input', runSearch);
-
-// Initial load
-renderSecrets(SECRETS);
+// LOAD ALL ON START
+window.addEventListener('DOMContentLoaded', () => {
+  filterAndSearch();
+});
