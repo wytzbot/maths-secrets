@@ -1,48 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
 :root {
-  --bg: #0b0f1a;
+  --bg: #0a0e1a;
   --card: #111827;
-  --text: #f3f4f6;
-  --accent: #60a5fa;
-  --accent2: #f472b6;
+  --card-hover: #1a2333;
+  --accent: #3b82f6;
+  --accent-2: #8b5cf6;
+  --text: #e5e7eb;
+  --text-muted: #9ca3af;
+  --border: #1f2937;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-body { background: var(--bg); color: var(--text); line-height: 1.7; }
 
-header { padding: 32px 20px; text-align: center; border-bottom: 1px solid #1f2937; }
-header h1 { font-size: 2.4rem; color: var(--accent); margin-bottom: 8px; font-weight: 800; }
-header p { color: #9ca3af; margin-bottom: 20px; }
-
-#search { 
-  width: 90%; max-width: 700px; padding: 14px 18px; margin: 0 auto 20px; display: block; 
-  border-radius: 12px; border: 1px solid #374151; background: var(--card); color: var(--text); 
-  font-size: 16px; outline: none; transition: 0.2s;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-#search:focus { border-color: var(--accent); }
 
-.tabs { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.tab { 
-  padding: 10px 18px; border-radius: 10px; background: var(--card); border: 1px solid #374151; 
-  color: var(--text); cursor: pointer; font-weight: 600; transition: 0.2s;
+body {
+  background: linear-gradient(135deg, #0a0e1a 0%, #0f172a 100%);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif; /* Body font - clean, modern */
+  line-height: 1.7;
+  padding: 20px;
+  min-height: 100vh;
 }
-.tab:hover { border-color: var(--accent); }
-.tab.active { background: var(--accent); color: #000; border-color: var(--accent); }
 
-#secrets-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; padding: 24px; max-width: 1400px; margin: 0 auto; }
-.card { 
-  background: var(--card); padding: 22px; border-radius: 16px; cursor: pointer; 
-  transition: 0.2s; border: 1px solid #1f2937;
+.container {
+  max-width: 900px;
+  margin: 0 auto;
 }
-.card:hover { transform: translateY(-4px); border-color: var(--accent); }
-.card .tag { font-size: 11px; padding: 4px 10px; border-radius: 20px; background: #374151; text-transform: uppercase; font-weight: 700; }
-.card h3 { margin: 12px 0 8px; font-size: 1.1rem; }
-.card p { color: #9ca3af; font-size: 0.95rem; }
 
-.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 1000; }
-.modal-content { background: var(--card); padding: 32px; border-radius: 20px; max-width: 850px; width: 100%; max-height: 90vh; overflow-y: auto; border: 1px solid #374151; }
-.hidden { display: none; }
-.close { float: right; font-size: 32px; cursor: pointer; color: #9ca3af; line-height: 1; }
-.close:hover { color: var(--text); }
-#modal-body h2 { color: var(--accent); margin-bottom: 16px; }
-#modal-body h4 { margin: 20px 0 10px; color: var(--accent2); }
-.example { background: #0b0f1a; padding: 14px; border-radius: 10px; margin: 10px 0; border-left: 3px solid var(--accent); }
-.example b { color: var(--accent2); }
+/* HEADINGS - Space Grotesk gives that premium tech feel */
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+/* SEARCH BAR */
+.search-box {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s;
+}
+.search-box:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* FILTER BUTTONS */
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+.filter-btn {
+  font-family: 'Space Grotesk', sans-serif;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn.active {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-color: transparent;
+  color: white;
+}
+.filter-btn:hover {
+  background: var(--card-hover);
+}
+
+/* CARDS */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: all 0.3s;
+}
+.card:hover {
+  background: var(--card-hover);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.card-badge {
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.card-simple {
+  color: var(--text-muted);
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+/* EXAMPLES - Use Mono font for math to look technical */
+.card-example {
+  background: #0a0e1a;
+  border-left: 3px solid var(--accent-2);
+  padding: 12px 16px;
+  margin: 10px 0;
+  border-radius: 8px;
+  font-family: 'JetBrains Mono', monospace; /* Makes math look pro */
+  font-size: 0.9rem;
+}
+.card-example b {
+  color: #60a5fa;
+  font-family: 'Outfit', sans-serif;
+}
+
+.card-tip {
+  margin-top: 15px;
+  padding: 12px;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #c4b5fd;
+}
+.card-tip b {
+  color: #a78bfa;
+  }
