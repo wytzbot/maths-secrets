@@ -1,1 +1,22 @@
-
+{
+  "name": "Maths Secret Vault",
+  "short_name": "MathVault",
+  "description": "60 Maths Secrets for University, Engineering and Mental Math. Explained simply.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0f1a",
+  "theme_color": "#60a5fa",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
