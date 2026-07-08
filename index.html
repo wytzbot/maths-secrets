@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maths Secret Vault | University Edition</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Maths Secret Vault</h1>
+      <p>University + Engineering + Mental Math. Explained like your smart friend.</p>
+      <input type="text" id="search" placeholder="Search anything... Laplace, derivative, 11 trick...">
+      <div class="tabs">
+        <button class="tab active" onclick="filterTab('all', this)">All 60</button>
+        <button class="tab" onclick="filterTab('university', this)">University 20</button>
+        <button class="tab" onclick="filterTab('engineering', this)">Engineering 20</button>
+        <button class="tab" onclick="filterTab('generic', this)">Quick Tricks 20</button>
+      </div>
+    </header>
 
+    <main id="secrets-grid"></main>
+    
+    <div id="modal" class="modal hidden" onclick="closeModalOutside(event)">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+  </div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+  </html>
