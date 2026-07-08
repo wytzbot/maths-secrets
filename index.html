@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#60a5fa">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maths Secret Vault | University Edition</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maths Secret Vault</title>
+
+  <!-- GOOGLE FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3b82f6">
 </head>
 <body>
-  <div class="app">
-    <header>
-      <h1>Maths Secret Vault</h1>
-      <p>University + Engineering + Mental Math. Explained like your smart friend.</p>
-      <input type="text" id="search" placeholder="Search anything... Laplace, derivative, 11 trick...">
-      <div class="tabs">
-        <button class="tab active" onclick="filterTab('all', this)">All 60</button>
-        <button class="tab" onclick="filterTab('university', this)">University 20</button>
-        <button class="tab" onclick="filterTab('engineering', this)">Engineering 20</button>
-        <button class="tab" onclick="filterTab('generic', this)">Quick Tricks 20</button>
-      </div>
-    </header>
+  <div class="container">
+    <h1>Maths Secret Vault</h1>
+    <p class="subtitle">University + Engineering + Mental Math. <br> Explained like your smart friend.</p>
 
-    <main id="secrets-grid"></main>
-    
-    <div id="modal" class="modal hidden" onclick="closeModalOutside(event)">
-      <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div id="modal-body"></div>
-      </div>
+    <input type="text" id="search" class="search-box" placeholder="Search anything... Laplace, derivative, 11 trick">
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All 60</button>
+      <button class="filter-btn" data-filter="university">University 20</button>
+      <button class="filter-btn" data-filter="engineering">Engineering 20</button>
+      <button class="filter-btn" data-filter="generic">Quick Tricks 20</button>
     </div>
+
+    <div id="results"></div>
+
+    <footer style="text-align:center; padding:30px 20px; color:#9ca3af;">
+      <a href="privacy-policy.html" style="color:#60a5fa;">Privacy Policy</a>
+    </footer>
   </div>
-<script src="data.js"></script>
-<script src="app.js"></script>
-  <footer style="text-align:center; padding:20px; color:#9ca3af;">
-<a href="privacy-policy.html" style="color:#60a5fa;">Privacy Policy</a>
-  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </body>
-  </html>
+</html>
