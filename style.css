@@ -11,27 +11,19 @@
   --border: #1f2937;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   background: linear-gradient(135deg, #0a0e1a 0%, #0f172a 100%);
   color: var(--text);
-  font-family: 'Outfit', sans-serif; /* Body font - clean, modern */
+  font-family: 'Outfit', sans-serif;
   line-height: 1.7;
   padding: 20px;
   min-height: 100vh;
 }
 
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-}
+.container { max-width: 900px; margin: 0 auto; }
 
-/* HEADINGS - Space Grotesk gives that premium tech feel */
 h1 {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 2.8rem;
@@ -39,7 +31,6 @@ h1 {
   background: linear-gradient(90deg, #3b82f6, #8b5cf6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
   text-align: center;
   letter-spacing: -1px;
   margin-bottom: 10px;
@@ -53,9 +44,12 @@ h1 {
   margin-bottom: 30px;
 }
 
-/* SEARCH BAR */
+/* SEARCH BAR UPGRADE */
 .search-box {
   width: 100%;
+  max-width: 600px;
+  margin: 0 auto 25px auto;
+  display: block;
   padding: 14px 20px;
   border-radius: 12px;
   border: 1px solid var(--border);
@@ -70,34 +64,41 @@ h1 {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
+.search-box::placeholder {
+  color: #64748b;
+  font-weight: 300;
+}
 
-/* FILTER BUTTONS */
+/* FILTER BUTTONS UPGRADE */
 .filters {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
   margin: 25px 0;
+}
+@media(min-width: 600px){
+  .filters { grid-template-columns: repeat(4, 1fr); }
 }
 
 .filter-btn {
   font-family: 'Space Grotesk', sans-serif;
-  padding: 10px 20px;
+  padding: 12px 16px;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--card);
   color: var(--text);
   font-weight: 500;
+  font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.2s;
+  letter-spacing: 0.2px;
 }
+.filter-btn:hover { background: var(--card-hover); }
 .filter-btn.active {
   background: linear-gradient(90deg, #3b82f6, #8b5cf6);
   border-color: transparent;
   color: white;
-}
-.filter-btn:hover {
-  background: var(--card-hover);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
 }
 
 /* CARDS */
@@ -137,26 +138,18 @@ h1 {
   color: white;
 }
 
-.card-simple {
-  color: var(--text-muted);
-  margin-bottom: 15px;
-  font-size: 1rem;
-}
+.card-simple { color: var(--text-muted); margin-bottom: 15px; }
 
-/* EXAMPLES - Use Mono font for math to look technical */
 .card-example {
   background: #0a0e1a;
   border-left: 3px solid var(--accent-2);
   padding: 12px 16px;
   margin: 10px 0;
   border-radius: 8px;
-  font-family: 'JetBrains Mono', monospace; /* Makes math look pro */
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.9rem;
 }
-.card-example b {
-  color: #60a5fa;
-  font-family: 'Outfit', sans-serif;
-}
+.card-example b { color: #60a5fa; font-family: 'Outfit', sans-serif; }
 
 .card-tip {
   margin-top: 15px;
@@ -166,6 +159,4 @@ h1 {
   font-size: 0.9rem;
   color: #c4b5fd;
 }
-.card-tip b {
-  color: #a78bfa;
-  }
+.card-tip b { color: #a78bfa; }
