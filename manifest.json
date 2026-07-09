@@ -1,8 +1,9 @@
 {
   "name": "Maths Secret Vault",
   "short_name": "MathVault",
-  "description": "60 Maths Secrets for University, Engineering and Mental Math. Explained simply.",
-  "start_url": "/",
+  "description": "60 Maths Secrets for students and engineers",
+  "start_url": "/maths-secrets/",
+  "scope": "/maths-secrets/",
   "display": "standalone",
   "background_color": "#0b0f1a",
   "theme_color": "#60a5fa",
